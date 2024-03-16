@@ -1,0 +1,124 @@
+---
+title: "FutureFlow: Navigating Tomorrow's Urban Traffic"
+author: "Janhavi Beley"
+date: ""
+output: 
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    code_download: true
+---
+
+The FutureFlow dataset gives us a big picture view of traffic in futuristic cities. It's like looking at a snapshot of each city's traffic situation at different times. There are more than 1.2 million of these snapshots, each one showing us what's happening on the roads in six fictional cities. These snapshots help us understand all the different things that affect traffic in these futuristic places.
+```{r, warning = FALSE, message = FALSE}
+# Load any R Packages you may need
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# Loading the required dataset
+library(readr)
+futuristic_city_traffic <- read_csv("~/Desktop/STAT 228/Project1/futuristic_city_traffic.csv")
+```
+
+### **Features**
+
+- *City:* The name of the city (e.g., MetropolisX, SolarisVille).
+- *Vehicle Type:* Type of vehicle in use (e.g., Car, Flying Car).
+- *Weather:* Current weather conditions at the time of data capture (e.g., Clear, Rainy).
+- *Economic Condition:* Economic state of the city at the time of the record (e.g., Booming, Recession).
+- *Day Of Week:* The day of the week.
+- *Hour Of Day:* The hour of the day when the data was recorded.
+- *Speed:* Recorded speed of the vehicle.
+- *Energy Consumption:* An estimate of energy consumption based on vehicle type and speed.
+- *Is Peak Hour:* Indicator of whether the record was during peak traffic hours.
+- *Random Event Occurred:* Indicator of whether a random event (like accidents or road closures) occurred.
+- *Traffic Density:* The density of traffic at the time of recording. 
+
+# Vehicle Type Distribution by City
+```{r}
+#Stacked Bar Plot. 
+ggplot(futuristic_city_traffic, aes(x = City, fill = `Vehicle Type`)) +
+  geom_bar() +
+  labs(title = "Vehicle Type Distribution by City", 
+       caption = "Data source: Futuristic City Traffic Data",
+       x = "City",
+       y = "Count",
+       fill = "Vehicle Type") +
+  theme_minimal()
+```
+
+## *Analysis of Vehicle Type Distribution by City:*
+
+The stacked bar plot above illustrates the distribution of vehicle types within each city in our dataset. Let's delve into what insights we can glean from this visualization:
+
+### 1. Overall Comparison:
+
+- Each stacked bar represents a city, and the segments within each bar represent different vehicle types.
+- By comparing the height of the stacked bars between cities, we can assess the overall volume of vehicles in each city.
+- The prominence of *"Autonomous Vehicles"* being the tallest segment in all cities suggests they are *the most common type of vehicle.* This uniform distribution implies a widespread adoption of autonomous technology in urban areas.
+- This highlights the growing significance of autonomous vehicles in shaping urban transportation, indicating their acceptance and integration into daily commuting practices. As autonomous technology advances, it's poised to revolutionize transportation infrastructure and redefine urban mobility.
+
+### 2. Proportion of Vehicle Types:
+
+- The length of each segment within the stacked bars represents the proportion of a specific vehicle type within each city.
+- For example, if the "Flying Car" segment is taller than the "Car" segment for **SolarisVille**, it indicates that flying cars are more prevalent in that city compared to cars.
+- In terms of length, the autonomous vehicle segment is the highest, followed by drones, flying cars, with cars being the least used vehicle type overall.
+
+### 3. City Comparison:
+
+- By comparing the heights of the segments within each stacked bar, we can understand the popularity of different vehicle types within each city.
+- For instance, if the "Flying Car" segment is taller than the "Car" segment in **SolarisVille**, it indicates a preference for flying cars over traditional cars in that city. However, flying cars are the least favored vehicle type overall, possibly due to concerns about disturbances while driving, such as encounters with birds.
+- Drones are a preferred vehicle type compared to both cars and flying cars, suggesting their high usage and popularity among residents.
+- Autonomous vehicles stand out as the most commonly used vehicle type across all cities, highlighting their widespread adoption and acceptance in urban transportation systems.
+### Summary:
+
+- By analyzing the heights of the segments within each stacked bar, we can gain insights into the **relative popularity of different vehicle types within each city**, which can *inform transportation planning and policy decisions*.
+- The stacked bar plot provides a visual representation of the distribution of vehicle types across different cities. 
+- The use of traditional cars are significantly low, however, people prefer using Autonomous Vehicle across all the cities as it is the most convenient to use, indicating that the roads in these cities are well developed and eligible for autonomous cars to be driven. 
+
+# Speed Distribution by Vehicle Type
+```{r}
+#Violin Plot
+ggplot(futuristic_city_traffic, aes(x = `Vehicle Type`, y = Speed, fill = `Vehicle Type`)) +
+  geom_violin() +
+  labs(title = "Speed by Vehicle Type", 
+       caption = "Data source: Futuristic City Traffic Data", 
+       x = "Vehicle Type", 
+       y = "Speed", 
+       fill = "Vehicle Type") +
+  theme_minimal()
+```
+
+## *Analysis of Speed by Vehicle Type:*
+
+The violin plot above compares the distribution of speeds for two types of vehicles: cars and flying cars. Let's break down what we can observe from the plot:
+
+### 1. Shape Comparison:
+
+- The shape of each violin represents the distribution of speeds for the corresponding vehicle type.
+- For cars, the violin appears wider around the lower speed range, indicating that a larger proportion of cars tend to travel at slower speeds.
+- In contrast, the violin for flying cars is narrower around the lower speed range and wider towards the higher speed range, suggesting that flying cars generally achieve higher speeds compared to cars.
+
+### 2. Peak Comparison:
+
+- The highest point of each violin represents the mode, or the most common speed, for the respective vehicle type.
+- In this plot, the peak of the violin for flying cars appears to be higher than that of cars, indicating that the most common speed for flying cars is higher than for cars.
+
+### 3. Spread Comparison:
+
+- The overall spread or width of the violins reflects the variability in speeds for each vehicle type.
+- The violin for cars exhibits a wider spread, suggesting a broader range of speeds compared to flying cars.
+- Flying cars show a narrower spread, indicating that their speeds tend to be more consistent or clustered around a specific range.
+
+### Summary:
+- From this visualization, it's evident that flying cars generally achieve higher speeds compared to traditional cars.
+- While cars exhibit a wider range of speeds, flying cars demonstrate a more concentrated speed distribution with higher typical speeds.
+- This information can be **valuable for urban planners and policymakers** in understanding the performance characteristics of different vehicle types and their implications for transportation infrastructure and traffic management in futuristic cities.
+
+# Potential uses:
+*FutureFlow is a valuable dataset that provides insights into traffic patterns in futuristic urban environments. It allows us to understand how factors like weather, vehicle types, and economic conditions influence traffic flow and energy consumption. Additionally, FutureFlow is instrumental in testing and developing traffic management algorithms for autonomous vehicles and smart city solutions. By analyzing the data, we can identify strategies to save energy, optimize transportation systems, and make cities smarter. Ultimately, FutureFlow helps us create more efficient, sustainable, and environmentally friendly transportation solutions for the cities of tomorrow.*
