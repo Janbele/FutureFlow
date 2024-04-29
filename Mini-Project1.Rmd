@@ -22,7 +22,7 @@ library(ggthemes)
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 # Loading the required dataset
 library(readr)
-futuristic_city_traffic <- read_csv("~/Desktop/STAT 228/Project1/futuristic_city_traffic.csv")
+futuristic_city_traffic <- read_csv("futuristic_city_traffic.csv")
 ```
 
 ### **Features**
